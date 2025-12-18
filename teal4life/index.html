@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>TEAL 4 LIFE — Official 90s Boy Band Shrine</title>
+
+  <style>
+    :root{
+      --mint-teal:#9ae2d1;
+      --soft-pink:#f2a2d4;
+      --lavender:#9b82bc;
+      --deep-teal:#149b9b;
+      --white:#ffffff;
+      --ink:#1f1f1f;
+      --butter:#fff6a6;
+    }
+
+    *{box-sizing:border-box}
+    body{
+      background-color:var(--soft-pink);
+      background-image:
+        linear-gradient(45deg, var(--soft-pink) 25%, var(--lavender) 25%, var(--lavender) 50%, var(--soft-pink) 50%, var(--soft-pink) 75%, var(--lavender) 75%, var(--lavender) 100%),
+        radial-gradient(circle at 20% 30%, rgba(255,255,255,0.25), transparent 35%),
+        radial-gradient(circle at 80% 60%, rgba(255,255,255,0.22), transparent 40%);
+      background-size:100px 100px, 700px 700px, 900px 900px;
+      color:#333;
+      font-family:"Arial Black", system-ui, -apple-system, Segoe UI, Arial, sans-serif;
+      margin:0;
+      padding:32px 16px;
+      cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32"><text y="22" font-size="22">💿</text></svg>') 8 8, auto;
+    }
+
+    .main-card{
+      background:var(--mint-teal);
+      border:8px solid var(--white);
+      box-shadow: 15px 15px 0px var(--lavender);
+      max-width: 980px;
+      margin:0 auto;
+      padding:24px;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .sparkles{
+      position:absolute; inset:-40px;
+      background:
+        repeating-linear-gradient(90deg, rgba(255,255,255,0.25) 0 6px, transparent 6px 18px);
+      opacity:0.25;
+      transform:rotate(-2deg);
+      pointer-events:none;
+      mix-blend-mode:overlay;
+    }
+
+    header{
+      position:relative;
+      text-align:left;
+      border-bottom:4px solid var(--white);
+      margin-bottom:16px;
+      padding-bottom:10px;
+    }
+
+    h1{
+      color:var(--white);
+      font-size: clamp(2.4rem, 4vw, 4rem);
+      text-shadow: 3px 3px 0px var(--lavender);
+      margin:0;
+      text-transform:uppercase;
+      font-style:italic;
+      letter-spacing:1px;
+    }
+
+    .sub-header{
+      color:var(--lavender);
+      font-size:1.2rem;
+      margin-top:6px;
+    }
+
+    .blink{
+      animation: blink 0.9s steps(2, jump-none) infinite;
+      background:var(--butter);
+      color:var(--ink);
+      padding:2px 6px;
+      border:2px dashed var(--lavender);
+      display:inline-block;
+      transform:rotate(-1deg);
+    }
+    @keyframes blink{ 50%{ opacity:0 } }
+
+    .marquee-bar{
+      background:var(--lavender);
+      color:var(--white);
+      padding:10px;
+      font-size:1.05rem;
+      margin: 14px -24px 18px -24px;
+      transform: rotate(-1deg);
+      border-top:3px solid rgba(255,255,255,0.6);
+      border-bottom:3px solid rgba(255,255,255,0.6);
+    }
+
+    .content-grid{
+      display:grid;
+      grid-template-columns: 1fr 2fr;
+      gap:16px;
+    }
+    
+}
+
+    .info-box{
+      background:var(--white);
+      border:3px solid var(--lavender);
+      padding:14px;
+      color:var(--deep-teal);
+      line-height:1.35;
+    }
+
+    .info-box .label{
+      display:inline-block;
+      padding:2px 6px;
+      border-radius:6px;
+      background: rgba(20,155,155,0.10);
+      margin-bottom:8px;
+    }
+
+    .parental-advisory{
+      background:white;
+      color:black;
+      padding:6px 8px;
+      font-family:system-ui, Arial, sans-serif;
+      font-size:10px;
+      width: 150px;
+      text-align:center;
+      border:2px solid black;
+      margin-top:14px;
+      transform: rotate(2deg);
+    }
+
+    .now-playing{
+      background: rgba(255,255,255,0.55);
+      border:2px solid rgba(255,255,255,0.75);
+      padding:12px;
+      border-radius:14px;
+      margin-top:14px;
+    }
+    .now-playing .np-title{
+      font-size:0.95rem;
+      color:#3b2b52;
+      margin:0 0 8px 0;
+    }
+
+    .tracklist{
+      background: rgba(255,255,255,0.5);
+      padding:14px;
+      border-radius:14px;
+      border:2px solid rgba(255,255,255,0.65);
+    }
+
+    .track{
+      background:var(--white);
+      margin-bottom:10px;
+      padding:12px;
+      border-left: 10px solid var(--lavender);
+      transition: transform 0.18s ease;
+    }
+    .track:hover{
+      transform: scale(1.01);
+      border-left-color: var(--soft-pink);
+    }
+    .track strong{ display:block; }
+    .track small{ color:#5e4a73; }
+
+    button{
+      background:var(--deep-teal);
+      color:white;
+      border:none;
+      padding:10px 16px;
+      font-family:"Arial Black", system-ui, Arial, sans-serif;
+      cursor:pointer;
+      box-shadow:4px 4px 0px var(--lavender);
+      margin-top:8px;
+    }
+    button:active{
+      box-shadow:none;
+      transform: translate(4px,4px);
+    }
+    button[disabled]{
+      opacity:0.55;
+      cursor:not-allowed;
+      filter:grayscale(0.4);
+    }
+
+    .gallery-wrap{
+      margin-top:18px;
+      padding-top:18px;
+      border-top:4px solid rgba(255,255,255,0.8);
+    }
+
+    .gallery-title{
+      margin:0 0 10px 0;
+      color:var(--white);
+      text-shadow:2px 2px 0px var(--lavender);
+      text-transform:uppercase;
+      letter-spacing:1px;
+      display:flex;
+      align-items:center;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+
+    .polaroid-grid{
+      display:grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap:12px;
+    }
+    @media (max-width: 980px){
+      .polaroid-grid{ grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 520px){
+      .polaroid-grid{ grid-template-columns: 1fr; }
+    }
+
+    .polaroid{
+      position:relative;
+      background: #fff;
+      padding:10px 10px 28px 10px;
+      border:2px solid rgba(0,0,0,0.08);
+      box-shadow: 10px 10px 0px rgba(155,130,188,0.55);
+      transform: rotate(var(--rot, -2deg));
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+    .polaroid:hover{
+      transform: rotate(0deg) scale(1.03);
+      box-shadow: 14px 14px 0px rgba(155,130,188,0.65);
+    }
+
+    .polaroid::after{
+      content:"";
+      position:absolute;
+      left:10px; right:10px; top:10px; bottom:28px; /* photo area */
+      pointer-events:none;
+      background:
+        radial-gradient(circle at 28% 22%, rgba(255,255,255,0.20), transparent 35%),
+        radial-gradient(circle at 76% 78%, rgba(0,0,0,0.12), transparent 45%),
+        repeating-linear-gradient(90deg, rgba(255,255,255,0.06) 0 2px, transparent 2px 7px),
+        repeating-linear-gradient(0deg, rgba(0,0,0,0.03) 0 1px, transparent 1px 5px);
+      mix-blend-mode: overlay;
+      opacity:0.55;
+    }
+
+    .polaroid img{
+      width:100%;
+      height:200px;
+      object-fit:cover;
+      display:block;
+      background: linear-gradient(135deg, rgba(20,155,155,0.25), rgba(242,162,212,0.25));
+      border:1px solid rgba(0,0,0,0.08);
+    }
+    .polaroid .cap{
+      margin-top:8px;
+      font-family: "Comic Sans MS", "Arial Black", system-ui, Arial, sans-serif;
+      font-size:0.95rem;
+      color:#222;
+      text-align:center;
+    }
+
+    .footer{
+      margin-top:18px;
+      font-size:0.9rem;
+      color:var(--lavender);
+      text-align:right;
+    }
+
+    .tiny{
+      font-family: system-ui, Arial, sans-serif;
+      font-size: 0.88rem;
+      line-height: 1.35;
+      opacity: 0.9;
+    }
+    .kbd{
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+      font-size: 0.85em;
+      background: rgba(255,255,255,0.75);
+      border:1px solid rgba(0,0,0,0.12);
+      padding: 2px 6px;
+      border-radius: 6px;
+    }
+  
+    .hero-banner{
+      margin: 14px 0 8px 0;
+      border: 4px solid rgba(255,255,255,0.9);
+      border-radius: 18px;
+      overflow: hidden;
+      position: relative;
+      box-shadow: 10px 10px 0px rgba(155,130,188,0.55);
+      transform: rotate(-0.7deg);
+    }
+    .hero-banner img{
+      width:100%;
+      height: 280px;
+      object-fit:cover;
+      object-position: 50% 10%;
+      display:block;
+      filter: saturate(1.25) contrast(1.08) hue-rotate(-6deg);
+      opacity: 0.92;
+    }
+    .hero-overlay{
+      position:absolute;
+      inset:0;
+      display:flex;
+      flex-direction:column;
+      justify-content:flex-end;
+      padding:14px;
+      background: linear-gradient(to top, rgba(20,155,155,0.65), rgba(20,155,155,0.15), transparent);
+      color:white;
+      text-shadow: 2px 2px 0 rgba(155,130,188,0.7);
+    }
+    .hero-tag{
+      display:inline-block;
+      width: fit-content;
+      background: rgba(242,162,212,0.92);
+      color:#1f1f1f;
+      padding:4px 10px;
+      border:2px dashed rgba(255,255,255,0.85);
+      border-radius: 999px;
+      transform: rotate(-1deg);
+      margin-bottom:6px;
+      font-size:0.95rem;
+    }
+    .hero-sub{
+      font-family: system-ui, Arial, sans-serif;
+      font-size:0.95rem;
+      opacity:0.95;
+      margin-bottom:2px;
+    }
+
+    /* Spotlight controls */
+    
+.spotlight-controls .tiny{ margin:0; }
+    
+
+/* Spotlight mode: show one side bigger */
+    
+
+.hero-link{ display:block; text-decoration:none; }
+    .hero-link:focus-visible{ outline:4px dashed rgba(242,162,212,0.9); outline-offset:6px; border-radius:18px; }
+
+  
+    
+
+/* Origin modal */
+    .modal-backdrop{
+      position:fixed;
+      inset:0;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:16px;
+      background: rgba(31,31,31,0.55);
+      backdrop-filter: blur(4px);
+      z-index: 9999;
+    }
+    .modal-card{
+      width: min(780px, 100%);
+      border-radius: 18px;
+      overflow:hidden;
+      border: 4px solid rgba(255,255,255,0.9);
+      box-shadow: 14px 14px 0 rgba(155,130,188,0.65);
+      transform: rotate(-0.6deg);
+    }
+    .modal-header{
+      background: linear-gradient(90deg, rgba(20,155,155,0.95), rgba(242,162,212,0.95));
+      padding: 14px 14px;
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:12px;
+    }
+    .modal-kicker{
+      display:inline-block;
+      background: rgba(255,246,166,0.95);
+      color:#1f1f1f;
+      border:2px dashed rgba(255,255,255,0.85);
+      border-radius:999px;
+      padding:4px 10px;
+      font-family: system-ui, Arial, sans-serif;
+      font-weight: 800;
+      transform: rotate(-1deg);
+      width: fit-content;
+    }
+    .modal-x{
+      background: rgba(255,255,255,0.92);
+      color:#1f1f1f;
+      border:2px solid rgba(155,130,188,0.65);
+      border-radius: 12px;
+      padding: 8px 10px;
+      cursor:pointer;
+      box-shadow:none;
+      margin-top:2px;
+      font-family: system-ui, Arial, sans-serif;
+      font-weight: 900;
+    }
+    .modal-body{
+      background: rgba(255,255,255,0.92);
+      padding: 16px 16px 18px 16px;
+      font-family: system-ui, Arial, sans-serif;
+      color:#2b2540;
+      line-height:1.45;
+    }
+
+  
+    .members-wrap{
+      margin-top:18px;
+      padding-top:18px;
+      border-top:4px solid rgba(255,255,255,0.8);
+    }
+    .members-grid{
+      display:grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap:12px;
+    }
+    @media (max-width: 980px){
+      .members-grid{ grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 520px){
+      .members-grid{ grid-template-columns: 1fr; }
+    }
+    .member-card{
+      background: rgba(255,255,255,0.55);
+      border:2px solid rgba(255,255,255,0.8);
+      border-radius: 16px;
+      padding:10px;
+      box-shadow: 8px 8px 0 rgba(155,130,188,0.55);
+      transform: rotate(var(--mrot, -1deg));
+      position:relative;
+      overflow:hidden;
+    }
+    .member-card:hover{
+      transform: rotate(0deg) scale(1.02);
+    }
+    .member-photo{
+      background:#fff;
+      border:2px solid rgba(0,0,0,0.08);
+      border-radius: 14px;
+      overflow:hidden;
+      position:relative;
+    }
+    .member-photo img{
+      width:100%;
+      height:220px;
+      object-fit:cover;
+      object-position: 50% 10%;
+      display:block;
+      filter:
+        sepia(0.22)
+        contrast(1.10)
+        saturate(1.35)
+        hue-rotate(-8deg)
+        brightness(1.03);
+    }
+    .member-photo::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      pointer-events:none;
+      background:
+        repeating-linear-gradient(0deg, rgba(0,0,0,0.03) 0 1px, transparent 1px 5px),
+        radial-gradient(circle at 25% 18%, rgba(255,255,255,0.20), transparent 35%);
+      mix-blend-mode: overlay;
+      opacity:0.5;
+    }
+    .member-name{
+      margin:10px 0 2px 0;
+      color:var(--white);
+      text-shadow:2px 2px 0 var(--lavender);
+      font-size:1.15rem;
+      text-transform:uppercase;
+      letter-spacing:0.5px;
+    }
+    .member-role{
+      font-family: system-ui, Arial, sans-serif;
+      font-weight: 800;
+      color:#3b2b52;
+      background: rgba(255,246,166,0.95);
+      border:2px dashed rgba(155,130,188,0.65);
+      border-radius: 999px;
+      padding:4px 10px;
+      display:inline-block;
+      transform: rotate(-1deg);
+      margin-bottom:8px;
+    }
+    .member-facts{
+      margin:0;
+      padding-left:18px;
+      font-family: system-ui, Arial, sans-serif;
+      color:#2b2540;
+      line-height:1.35;
+      font-size:0.95rem;
+    }
+    .member-facts li{ margin:6px 0; }
+
+  
+    .hero-banner{ cursor:pointer; }
+    .hero-banner:hover{ filter: drop-shadow(0 0 0.6rem rgba(242,162,212,0.35)); }
+
+  
+    /* Modal must sit above EVERYTHING and capture clicks */
+    .modal-backdrop{ z-index: 999999 !important; pointer-events: auto; }
+    .modal-card{ pointer-events: auto; }
+
+  
+    /* ===== COMPACT LAYOUT LOCK (do not remove) ===== */
+    body{
+      display:block;
+    }
+    .main-card, .extra-card{
+      max-width: 860px !important;
+      width: calc(100% - 24px) !important;
+      margin-left: auto !important;
+      margin-right: auto !important;
+    }
+    .content-grid{
+      max-width: 860px !important;
+      margin-left: auto !important;
+      margin-right: auto !important;
+    }
+    /* Prevent any wide sections from spilling */
+    .members-wrap, .gallery-wrap, .tracklist, .player-wrap{
+      max-width: 100% !important;
+    }
+
+  
+    /* Members + gallery compact wrapper */
+    .members-card{
+      max-width: 860px !important;
+      width: calc(100% - 24px) !important;
+      margin-left: auto !important;
+      margin-right: auto !important;
+      margin-top: 18px;
+    }
+
+  </style>
+</head>
+
+<body>
+  <div class="main-card">
+    <div class="sparkles" aria-hidden="true"></div>
+
+    <header>
+      <h1>TEAL 4 LIFE</h1>
+      <div class="sub-header">
+        Official 90s Boy Band Shrine
+        <span class="blink">NEW!</span>
+      </div>
+    </header>
+
+    <div class="hero-banner" aria-label="Teal 4 Life banner">
+      <img src="photos/1nADiKjpjmgcDXi1wI8LHnyK7IZtGFOAE.jpg" alt="TEAL 4 LIFE — band banner" loading="lazy" />
+      <div class="hero-overlay">
+        <div class="hero-tag">⭐ OFFICIAL BAND PHOTO ⭐</div>
+        <div class="hero-sub">Warning: may cause sudden nostalgia and unsolicited choreography.</div>
+      </div>
+    </div>
+
+    <div class="marquee-bar">
+      <marquee behavior="alternate" scrollamount="8">
+        *** TOUR BUS RUNS ON VIBES ONLY *** TEAL IS A LIFESTYLE *** LEAVE A MESSAGE ON THE TEAL-LINE ***
+      </marquee>
+    </div>
+<label class="pill"><input type="radio" name="spot" value="songs" checked> 🎧 Songs</label>
+      <label class="pill"><input type="radio" name="spot" value="photos"> 📸 Photos</label>
+      <div class="tiny" style="opacity:.9;"></div>
+    </div>
+
+    <div class="content-grid">
+      <div class="left-col">
+        <div class="info-box">
+          <div class="label"><strong>THE BAND</strong></div><br/>
+          <strong>TEAL 4 LIFE</strong><br/>
+          <span class="tiny">Because teal never dies. It just… moisturizes.</span>
+          <hr style="border:none;border-top:2px dashed rgba(155,130,188,0.6);margin:10px 0"/>
+          <strong>FEATURING</strong><br/>
+          C. NAIRN<br/>
+          D. CALDWELL<br/>
+          S. HORNBROOK<br/>
+          S. GILL
+        </div>
+
+        <div class="parental-advisory">PARENTAL ADVISORY<br/>EXCESSIVE CHEESE</div>
+
+        <div class="now-playing">
+          <p class="np-title"><strong>NOW PLAYING:</strong> <span id="nowPlaying">Nothing yet 😭</span></p>
+          <iframe id="drivePlayer" title="Teal 4 Life Player" style="width:100%; height:60px; border:0; border-radius:12px; background: rgba(255,255,255,0.85);" allow="autoplay"></iframe>
+          
+          <p class="tiny" style="margin:8px 0 0 0;">
+            If a track won’t play: make sure the MP3 in Drive is shared as <strong>Anyone with the link (Viewer)</strong>. We’re using Drive’s built-in preview player (more reliable than direct MP3 links).
+          </p>
+
+        </div>
+      </div>
+
+      <div class="tracklist">
+        <div class="track">
+          <strong>01. Chains &amp; Gains</strong>
+          <small>"From the tee pad to the tray"</small><br/>
+          <button data-track="chains_gains" disabled>PLAY NOW</button>
+        </div>
+
+        <div class="track">
+          <strong>02. 18 Holes but only one heart</strong>
+          <small>"Par-ty for two" — <strong>for the ladies</strong></small><br/>
+          <button data-track="18_holes_one_heart" disabled>PLAY NOW</button>
+        </div>
+
+        <div class="track">
+          <strong>03. Summer '25 (Teal Christmas)</strong>
+          <small>"Snow in my soul, sun on my chain"</small><br/>
+          <button data-track="summer25_teal_christmas" disabled>PLAY NOW</button>
+        </div>
+
+        <div class="track">
+          <strong>04. The Takeover (Teal Manifesto)</strong>
+          <small>"We came. We saw. We color-graded."</small><br/>
+          <button data-track="the_takeover_teal_manifesto" disabled>PLAY NOW</button>
+        </div>
+
+        <p class="tiny" style="margin:10px 0 0 0;">
+           will be wiring these buttons to your actual audio files (Google Drive / etc).
+        </p>
+      </div>
+    </div>
+</div>
+
+        <div class="featured-side">
+          <div class="tiny" style="margin-bottom:10px;">
+            
+          </div>
+<div class="tiny" style="margin-top:10px; opacity:.95;">
+             🫡
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="main-card members-card">
+
+    
+    <div class="members-wrap" id="members">
+      <h2 class="gallery-title">🧑‍🎤 Band Member Profiles <span class="tiny">(cringe certified • kitten‑approved • cheese‑powered)</span></h2>
+      <div class="members-grid">
+        
+      <div class="member-card" style="--mrot:-2.5deg">
+        <div class="member-photo">
+          <img src="photos/1VJoX9C8zHazPi2XsIVGlY6nUh86cz5H5.jpg" alt="Sam Hornbrook profile photo" loading="lazy"
+               data-id="1VJoX9C8zHazPi2XsIVGlY6nUh86cz5H5"
+               onerror="this.src='photos/1VJoX9C8zHazPi2XsIVGlY6nUh86cz5H5.jpg"/>
+        </div>
+        <div class="member-name">Sam Hornbrook</div>
+        <div class="member-role">The Heartthrob Hydrator</div>
+        <ul class="member-facts">
+          <li>Signature move: the slow‑motion teal wink (legal disclaimer: may cause feelings).</li>
+<li>Snack of choice: string cheese, lovingly shared with any nearby kittens.</li>
+<li>Secret talent: turns awkward silence into harmony… and then into merch.</li>
+        </ul>
+      </div>
+    
+      <div class="member-card" style="--mrot:-1.3deg">
+        <div class="member-photo">
+          <img src="photos/1Qgw4gpAEAwDf_4MAQu8uRrHE5tqxT6dN.jpg" alt="Steve Gill profile photo" loading="lazy"
+               data-id="1Qgw4gpAEAwDf_4MAQu8uRrHE5tqxT6dN"
+               onerror="this.src='photos/1Qgw4gpAEAwDf_4MAQu8uRrHE5tqxT6dN.jpg"/>
+        </div>
+        <div class="member-name">Steve Gill</div>
+        <div class="member-role">The Groove Locksmith</div>
+        <ul class="member-facts">
+          <li>Signature move: the “two‑step & regret” — straight from a 1998 music video.</li>
+<li>Snack of choice: cheese slices, folded like love letters to tiny cats.</li>
+<li>Secret talent: can hear a dial‑up modem and immediately find the beat.</li>
+        </ul>
+      </div>
+    
+      <div class="member-card" style="--mrot:-0.1deg">
+        <div class="member-photo">
+          <img src="photos/1gk12cprwoqG5KRiAIzIcieBTkfRmEqcF.jpg" alt="Dave Caldwell profile photo" loading="lazy"
+               data-id="1gk12cprwoqG5KRiAIzIcieBTkfRmEqcF"
+               onerror="this.src='photos/1gk12cprwoqG5KRiAIzIcieBTkfRmEqcF.jpg"/>
+        </div>
+        <div class="member-name">Chris Nairn</div>
+        <div class="member-role">The Power Ballad Provider</div>
+        <ul class="member-facts">
+          <li>Signature move: dramatic stare into the middle distance (the distance stares back).</li>
+<li>Snack of choice: cheddar cubes for him, babybel for the kittens.</li>
+<li>Secret talent: writes choruses that refuse to leave your brain. Ever.</li>
+        </ul>
+      </div>
+    
+      <div class="member-card" style="--mrot:1.1deg">
+        <div class="member-photo">
+          <img src="photos/17EZE_mZ9RaNMde0Pcoxt7ph3DCStOro_.jpg" alt="Chris Nairn profile photo" loading="lazy"
+               data-id="17EZE_mZ9RaNMde0Pcoxt7ph3DCStOro_"
+               onerror="this.src='photos/17EZE_mZ9RaNMde0Pcoxt7ph3DCStOro_.jpg"/>
+        </div>
+        <div class="member-name">Dave Caldwell</div>
+        <div class="member-role">The Teal Commander</div>
+        <ul class="member-facts">
+          <li>Signature move: points at the camera like he knows your MySpace password.</li>
+<li>Snack of choice: a respectful platter of cheese… for the kittens first, obviously.</li>
+<li>Secret talent: turns disc golf weekends into chart‑ready mythology.</li>
+        </ul>
+      </div>
+    
+      </div>
+    </div>
+
+    <div class="gallery-wrap">
+      <h2 class="gallery-title">📸 Polaroid Gallery <span class="tiny">(we’ll swap these placeholders for your Drive photos)</span></h2>
+
+      <div class="polaroid-grid" id="polaroidGrid"></div>
+    </div>
+
+    <div class="footer">USH INN PRODUCTIONS // TEAL 4 LIFE © 2025</div>
+  </div>
+    </div>
+
+  <script>
+    // ===== Step 2 will fill these with your real audio URLs =====
+    // For now they are empty on purpose (buttons stay disabled until we add URLs).
+    const TRACKS = {
+      chains_gains: { title: "Chains & Gains", url: "https://drive.google.com/file/d/1M5ZIjvEuznpxxzkmL3T7XIWJb0Rysf8B/preview" },
+      "18_holes_one_heart": { title: "18 Holes but only one heart", url: "https://drive.google.com/file/d/1TBkCPK-PN1qyA3I_WFjOSQWoGIjnb430/preview" },
+      summer25_teal_christmas: { title: "Summer '25 (Teal Christmas)", url: "https://drive.google.com/file/d/1J5Lfdqq6Vmz6VhEWvt8O8ZApLKTQhQyb/preview" },
+      the_takeover_teal_manifesto: { title: "The Takeover (Teal Manifesto)", url: "https://drive.google.com/file/d/12_LFsNb-o32VMiDzWDJy1w0m028_wDL-/preview" },
+    };
+
+    const player = document.getElementById("drivePlayer");
+    const nowPlaying = document.getElementById("nowPlaying");
+
+    function playTrack(key){
+      const t = TRACKS[key];
+      if(!t || !t.url) return;
+      player.src = t.url;
+      nowPlaying.textContent = t.title;
+    }
+
+    // Enable + wire up buttons (Drive preview URLs are always present)
+    document.querySelectorAll("button[data-track]").forEach(btn=>{
+      const key = btn.getAttribute("data-track");
+      btn.disabled = false;
+      btn.addEventListener("click", ()=> playTrack(key));
+    });
+// Polaroid tilt randomness for maximum 90s cringe
+    document.querySelectorAll(".polaroid").forEach((p,i)=>{
+      const rot = (Math.random()*8 - 4).toFixed(1); // -4deg .. +4deg
+      p.style.setProperty("--rot", rot + "deg");
+    });
+  
+    // ===== Photos (hardcoded Drive IDs) =====
+    // IMPORTANT: Each photo file must be shared as "Anyone with the link (Viewer)" in Drive.
+    const PHOTOS = [
+      { id: "1nADiKjpjmgcDXi1wI8LHnyK7IZtGFOAE", caption: "Teal Hearts Club: Chapter One 💚" },
+      { id: "1R9DWazAdY-swkUzdT398cjFfqZfD7zco", caption: "Synchronised Smoulder (Dial‑Up Edition)" },
+      { id: "1lR56oAIK0eg8pCzZx2hWZnlye6gwGAwX", caption: "Hydrated Harmony: The Teal Vow" },
+      { id: "1iZHUasaD-XmnzWHYp4s2UYKpdKUGP_8j", caption: "Oops… We Did It in Teal Again" },
+      { id: "1bWd0QvFOAR3i7A6Sl6j6KCFt3nBi30dE", caption: "Tour Bus Tears & Glitter Gels" },
+      { id: "1UMJ1t990P9vot7sjvrw1wlntM90igZk_", caption: "Frosted Tips, Unfrosted Feelings" },
+      { id: "1T3hj9rc9eDTco_oiflNRdLQV21JMiDb9", caption: "Backstreet Teal’s Back (Alright!)" },
+      { id: "1S0wtDOZGCSTiAftnQ7gqCJw2LqjjBNdz", caption: "Slow Jam in a Disc Golf World" },
+      { id: "1DWdIUCIsv7dg_inh3paX0CFU-FFFqQpU", caption: "Chain Maintenance: A Love Language" },
+      { id: "1AyS2JSfMdcFaTCUDcp6HFxhexcP8dgzJ", caption: "Matching Outfits, Mismatching Emotions" },
+      { id: "19Y5jzWG10X_UChqrYQ3MVXejfcWmRBA-", caption: "Teal‑tastic: Live, Laugh, Lanyard" },
+      { id: "17M4I9em97RTcjolt7rsOvScSnLvpprDY", caption: "Pray for My Pager (I Miss You)" },
+      { id: "1yHQF4G0mM8wSnlh-iRRFiGsFwvF9GoOG", caption: "Poster-Worthy & Slightly Sweaty" },
+      { id: "1q5PdcwSsbzV9GJw2iCZxdEsQlt0EW7O7", caption: "The Encore Nobody Asked For" }
+    ];
+
+    function driveThumb(id){ return `photos/${id}.jpg`; }.jpg"polaroidGrid");
+    if(grid){
+      grid.innerHTML = PHOTOS.map((p, idx) => `
+        <div class="polaroid">
+          <img src="${driveThumb(p.id, 'w1200')}"
+               alt="${p.caption}"
+               loading="lazy"
+               data-id="${p.id}"
+               onerror="this.src='${driveThumb('${p.id}','w600')}'.replace('${p.id}', this.dataset.id);" />
+          <div class="cap">${p.caption}</div>
+        </div>
+      `).join("");
+
+      // tilt randomness
+      document.querySelectorAll(".polaroid").forEach((pol)=>{
+        const rot = (Math.random()*8 - 4).toFixed(1);
+        pol.style.setProperty("--rot", rot + "deg");
+      });
+    }
+
+    
+// ===== Origin modal (robust init) =====
+    (function initOriginModal(){
+      function setup(){
+        const originModal = document.getElementById("originModal");
+        const closeModalBtn = document.getElementById("closeModalBtn");
+        const enterBtn = document.getElementById("enterBtn");
+
+        if(!originModal) return;
+
+        function closeOriginModal(){
+          originModal.style.display = "none";
+        }
+
+        if(closeModalBtn) closeModalBtn.addEventListener("click", (e)=>{ e.preventDefault(); e.stopPropagation(); closeOriginModal(); });
+        if(enterBtn) enterBtn.addEventListener("click", (e)=>{ e.preventDefault(); e.stopPropagation(); closeOriginModal(); });
+
+        // Click outside the card closes
+        originModal.addEventListener("click", (e)=>{ if(e.target === originModal) closeOriginModal(); });
+
+        // Esc closes
+        document.addEventListener("keydown", (e)=>{ if(e.key === "Escape") closeOriginModal(); });
+      }
+
+      if(document.readyState === "loading"){
+        document.addEventListener("DOMContentLoaded", setup);
+      } else {
+        setup();
+      }
+    })();
+
+    
+// ===== Hero banner click (open full photo) =====
+    const hero = document.querySelector(".hero-banner");
+    if(hero){
+      hero.addEventListener("click", ()=> window.open("photos/1nADiKjpjmgcDXi1wI8LHnyK7IZtGFOAE.jpg", "_blank", "noopener,noreferrer"));
+    }
+
+    // Guard: while the origin modal is open, ignore clicks underneath
+    const _hero = document.querySelector(".hero-banner");
+    if(_hero && originModal){
+      _hero.addEventListener("click", (e)=>{
+        if(originModal.style.display !== "none"){ e.preventDefault(); e.stopPropagation(); return false; }
+      }, true);
+    }
+
+  </script>
+
+  <div class="modal-backdrop" id="originModal" role="dialog" aria-modal="true" aria-labelledby="originTitle" aria-describedby="originBody">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div>
+          <div class="modal-kicker">📟 TEAL 4 LIFE ORIGIN STORY</div>
+          <h2 id="originTitle" style="margin:6px 0 0 0; color:white; text-shadow:2px 2px 0 rgba(155,130,188,0.7);">How it all began…</h2>
+        </div>
+        <button type="button" class="modal-x" id="closeModalBtn" aria-label="Close">✖</button>
+      </div>
+
+      <div class="modal-body" id="originBody">
+        <p style="margin-top:0;">
+          One night on our <strong>disc golf holiday</strong>, we all <strong>accidentally wore the same outfit</strong>.
+          No plan. No group chat. Just… teal destiny.
+        </p>
+        <p>
+          In that exact moment, <strong>TEAL 4 LIFE</strong> was born — and <strong>John, our manager</strong>, immediately started marketing us like it was 1999 and the charts depended on it.
+        </p>
+        <p style="margin-bottom:0;">
+          And yes: the songs are <strong>real</strong>. Track 2 is specifically <strong>for the ladies</strong>.
+          (Respectful slow-jam energy only.)
+        </p>
+
+        <div style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end;">
+          <button type="button" id="enterBtn">ENTER THE TEALVERSE</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
